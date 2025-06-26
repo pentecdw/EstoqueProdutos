@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using EstoqueProdutos.Models;
+using EstoqueProdutos.Controllers;
+using EstoqueProdutos;
 
 namespace EstoqueProdutos.Controllers;
 
