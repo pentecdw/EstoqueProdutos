@@ -54,15 +54,12 @@ namespace EstoqueProdutos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Supplier supplier)
+        public async Task<IActionResult> Create(Supplier supplier)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(supplier);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(supplier);
+            if (!ModelState.IsValid) return View(supplier);
+            _context.Add(supplier);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Suppliers/Edit/5

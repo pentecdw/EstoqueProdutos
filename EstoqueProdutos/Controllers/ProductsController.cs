@@ -22,7 +22,8 @@ namespace EstoqueProdutos.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _context.Products.Include(p => p.Supplier).ToListAsync());
+
         }
 
         // GET: Products/Details/5
@@ -46,6 +47,7 @@ namespace EstoqueProdutos.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            ViewBag.SupplierId = new SelectList(_context.Suppliers, "Id", "Name");
             return View();
         }
 
@@ -78,6 +80,8 @@ namespace EstoqueProdutos.Controllers
             {
                 return NotFound();
             }
+            
+            ViewBag.SupplierId = new SelectList(_context.Suppliers, "Id", "Name", product.Supplier);
             return View(product);
         }
 
